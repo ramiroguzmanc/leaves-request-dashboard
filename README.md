@@ -1,54 +1,79 @@
-# React + TypeScript + Vite
+# Employee Leave Request Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple dashboard application for managing employee leave requests. This application allows administrators to view and manage leave requests submitted by employees.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The dashboard displays the following information for each leave request:
 
-## Expanding the ESLint configuration
+1. Employee name
+2. Leave type
+3. Date range (from - to)
+4. Status
+5. Reason
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Administrators can approve or reject leave requests directly from the dashboard interface.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## UI Components
+
+This project utilizes the following UI5 components:
+
+- Table: For displaying leave request data
+- Button: For action triggers
+- Select: For filtering options
+- SegmentedButton: For toggling between different views
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have [Bun](https://bun.sh/) installed on your system.
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/ramiroguzmanc/leaves-request-dashboard.git
+
+# Navigate to the project directory
+cd leaves-request-dashboard
+
+# Install dependencies
+bun install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Running the Application
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+To start the development server:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+bun run dev
 ```
+
+The application will be available at `http://localhost:5173`.
+
+To build the application for production:
+
+```bash
+bun run build
+```
+
+### Testing
+
+To run the test suite:
+
+```bash
+bun run test
+```
+
+## Technology Stack
+
+- React
+- TypeScript
+- Vite
+- UI5 Web Components
+- Bun
+- Shadcn UI
+- Tailwind CSS
+- Vitest
+- Axios
