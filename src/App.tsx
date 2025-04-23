@@ -1,16 +1,11 @@
 import './App.css'
-import { LeaveRequestTable } from './components'
+import { LeaveRequestView } from './views/LeaveRequestView'
 
 function App() {
 
   return (
     <main>
-      <section style={{
-        maxWidth: '1200px',
-        maxHeight: '50vh',
-      }}>
-        <LeaveRequestTable />
-      </section>
+      <LeaveRequestView />
     </main>
   )
 }
