@@ -6,6 +6,7 @@ import { LeaveRequest, Status } from "../models/leaveRequest.models"
 import { getLeaveRequests } from "../services"
 import { LeaveRequestTable } from "./components/LeaveRequestTable"
 import { filterAndSortRequests } from "./utils/filterAndSortRequests"
+import { updateRequestStatus } from "./utils/leaveRequestUtils"
 
 export const LeaveRequestView = () => {
   const [loading, setLoading] = useState(true)
@@ -45,15 +46,7 @@ export const LeaveRequestView = () => {
 
   const changeRequestStatus = (id: string, status: Status.Approved | Status.Rejected) => {
     setLeaveRequests(prevRequests => {
-      const updatedRequests = prevRequests.map(request => {
-        if (request.id === id) {
-          return {
-            ...request,
-            status: status
-          }
-        }
-        return request
-      })
+      const updatedRequests = updateRequestStatus(prevRequests, id, status)
       return updatedRequests
     })
   }

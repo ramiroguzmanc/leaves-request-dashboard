@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`StatusBadge > matches snapshot 1`] = `
+<div
+  class="border px-2 py-1 rounded lowercase first-letter:uppercase border-green-300 text-green-600 bg-green-100"
+>
+  APPROVED
+</div>
+`;
