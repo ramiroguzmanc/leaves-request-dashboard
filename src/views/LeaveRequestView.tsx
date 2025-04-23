@@ -1,10 +1,11 @@
 import { RequestTableFilters, SortDirection, SortField } from "@/views/components/RequestTableFilters"
 import { SelectDomRef, Ui5CustomEvent } from "@ui5/webcomponents-react"
 import { SelectChangeEventDetail } from "@ui5/webcomponents/dist/Select.js"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { LeaveRequest, Status } from "../models/leaveRequest.models"
 import { getLeaveRequests } from "../services"
 import { LeaveRequestTable } from "./components/LeaveRequestTable"
+import { filterAndSortRequests } from "./utils/filterAndSortRequests"
 
 export const LeaveRequestView = () => {
   const [loading, setLoading] = useState(true)
@@ -42,37 +43,6 @@ export const LeaveRequestView = () => {
     setStatus(selectedStatus as Status)
   }
 
-  const filterAndSortRequests = useCallback(
-    (
-      field: SortField = sortField,
-      direction: SortDirection = sortDirection,
-      statusFilter: Status = status
-    ) => {
-      let filteredRequests = [...initialLeaveRequests.current]
-      if (statusFilter !== Status.All) {
-        filteredRequests = filteredRequests.filter(request => request.status === statusFilter)
-      }
-
-      if (direction === 'NONE') {
-        setLeaveRequests(filteredRequests)
-        return
-      }
-      const sortedRequests = [...filteredRequests].sort((a, b) => {
-        const dateA = new Date(a[field]).getTime();
-        const dateB = new Date(b[field]).getTime();
-
-        if (direction === 'ASC') {
-          return dateA - dateB;
-        } else {
-          return dateB - dateA;
-        }
-      });
-
-      setLeaveRequests(sortedRequests)
-    },
-    [sortField, sortDirection, status]
-  )
-
   const changeRequestStatus = (id: string, status: Status.Approved | Status.Rejected) => {
     setLeaveRequests(prevRequests => {
       const updatedRequests = prevRequests.map(request => {
@@ -93,8 +63,14 @@ export const LeaveRequestView = () => {
   }, [])
 
   useEffect(() => {
-    filterAndSortRequests()
-  }, [filterAndSortRequests])
+    const filtered = filterAndSortRequests(
+      initialLeaveRequests.current,
+      sortField,
+      sortDirection,
+      status
+    )
+    setLeaveRequests(filtered)
+  }, [sortField, sortDirection, status])
 
   return (
     <>
