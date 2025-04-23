@@ -4,6 +4,7 @@ import { LeaveRequest, Status } from "@/models/leaveRequest.models"
 import { Table, TableCell, TableHeaderCell, TableHeaderRow, TableRow } from "@ui5/webcomponents-react"
 import { CircleCheck, CircleX } from "lucide-react"
 import { format } from "@formkit/tempo"
+import { StatusBadge } from "./StatusBadge"
 
 interface Props {
   loading: boolean
@@ -37,7 +38,7 @@ export const LeaveRequestTable: FC<Props> = ({ loading, leaveRequests, changeReq
             <span>To {format(request.date_to, { date: 'short', time: 'short' })}</span>
           </TableCell>
           <TableCell className='px-2'>
-            <span>{request.status}</span>
+            <StatusBadge status={request.status} />
           </TableCell>
           <TableCell className='px-2 py-1'>
             <span>{request.reason}</span>

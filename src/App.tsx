@@ -1,11 +1,14 @@
 import './App.css'
+import { AppLayout } from './layout/AppLayout'
 import { LeaveRequestView } from './views/LeaveRequestView'
 
 function App() {
 
   return (
     <main>
-      <LeaveRequestView />
+      <AppLayout>
+        <LeaveRequestView />
+      </AppLayout>
     </main>
   )
 }
