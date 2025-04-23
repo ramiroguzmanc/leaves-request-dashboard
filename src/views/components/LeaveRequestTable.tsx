@@ -1,8 +1,9 @@
+import { FC } from "react"
 import { Button } from "@/components/ui/button"
 import { LeaveRequest, Status } from "@/models/leaveRequest.models"
 import { Table, TableCell, TableHeaderCell, TableHeaderRow, TableRow } from "@ui5/webcomponents-react"
 import { CircleCheck, CircleX } from "lucide-react"
-import { FC } from "react"
+import { format } from "@formkit/tempo"
 
 interface Props {
   loading: boolean
@@ -32,8 +33,8 @@ export const LeaveRequestTable: FC<Props> = ({ loading, leaveRequests, changeReq
             <span>{request.type_of_leave}</span>
           </TableCell>
           <TableCell className='px-2'>
-            <span>{request.date_from}</span>
-            <span>{request.date_to}</span>
+            <span>From {format(request.date_from, { date: 'short', time: 'short' })}</span>
+            <span>To {format(request.date_to, { date: 'short', time: 'short' })}</span>
           </TableCell>
           <TableCell className='px-2'>
             <span>{request.status}</span>
